@@ -1,7 +1,8 @@
-<div>
+<template>
+    <div>
       <h1>Administrator's Operating Catalogue</h1>
       <p>Welcome back, honourable administrator.</p>
-</div>
+    </div>
   </template>
   
   <style scoped>
