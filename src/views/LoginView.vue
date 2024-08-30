@@ -32,13 +32,13 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-// 设置固定的用户名和密码
-const correctUsername = 'user'; // 普通用户的固定用户名
-const correctPassword = '123456'; // 普通用户的固定密码
+// 普通用户的固定用户名和密码
+const correctUsername = 'user'
+const correctPassword = '123456'
 
-// 设置管理员账号和密码
-const adminUsername = 'admin';
-const adminPassword = '0123456';
+// 管理员账号和密码
+const adminUsername = 'admin'
+const adminPassword = '0123456'
 
 const formData = ref({
   username: '',
@@ -46,63 +46,65 @@ const formData = ref({
   confirmPassword: ''
 })
 
-const usernameError = ref(null);
-const passwordError = ref(null);
-const confirmPasswordError = ref(null);
+const usernameError = ref(null)
+const passwordError = ref(null)
+const confirmPasswordError = ref(null)
 const router = useRouter()
 
 const validateFields = () => {
-  usernameError.value = null;
-  passwordError.value = null;
-  confirmPasswordError.value = null;
+  usernameError.value = null
+  passwordError.value = null
+  confirmPasswordError.value = null
 
   if (!formData.value.username) {
-    usernameError.value = 'Please enter your account.';
+    usernameError.value = 'Please enter your account.'
   }
   if (!formData.value.password) {
-    passwordError.value = 'Please enter your password.';
+    passwordError.value = 'Please enter your password.'
   }
   if (formData.value.password !== formData.value.confirmPassword) {
-    confirmPasswordError.value = 'Passwords do not match!';
+    confirmPasswordError.value = 'Passwords do not match!'
   }
   
-  return !usernameError.value && !passwordError.value && !confirmPasswordError.value;
-};
+  return !usernameError.value && !passwordError.value && !confirmPasswordError.value
+}
 
 const login = () => {
   if (!validateFields()) {
-    return;
+    return
   }
 
   // 如果输入的是管理员账号但点击了普通登录按钮，跳转到AccessDeniedView
   if (formData.value.username === adminUsername && formData.value.password === adminPassword) {
-    passwordError.value = 'Incorrect login method for admin account!';
-    router.push('/access-denied');
-    return;
+    passwordError.value = 'Incorrect login method for admin account!'
+    router.push('/access-denied')
+    return
   }
 
   if (formData.value.username === correctUsername && formData.value.password === correctPassword) {
-    router.push('/home'); // 普通用户登录成功后跳转到HomeView
+    localStorage.setItem('isAuthenticated', 'true') // 设置认证状态
+    router.push('/home') // 普通用户登录成功后跳转到HomeView
   } else {
-    passwordError.value = 'Incorrect username or password!';
-    router.push('/access-denied'); // 登录失败，跳转到AccessDeniedView
+    passwordError.value = 'Incorrect username or password!'
+    router.push('/access-denied') // 登录失败，跳转到AccessDeniedView
   }
 }
 
 const register = () => {
-  router.push('/register'); // 点击注册按钮跳转到RegistrationPage.vue
+  router.push('/register') // 点击注册按钮跳转到RegistrationPage.vue
 }
 
 const adminLogin = () => {
   if (!validateFields()) {
-    return;
+    return
   }
 
   if (formData.value.username === adminUsername && formData.value.password === adminPassword) {
-    router.push('/manager'); // 管理员登录成功后跳转到管理员页面
+    localStorage.setItem('isAuthenticated', 'true') // 设置认证状态
+    router.push('/manager') // 管理员登录成功后跳转到管理员页面
   } else {
-    passwordError.value = 'Incorrect admin username or password!';
-    router.push('/access-denied'); // 验证失败，跳转到AccessDeniedView
+    passwordError.value = 'Incorrect admin username or password!'
+    router.push('/access-denied') // 验证失败，跳转到AccessDeniedView
   }
 }
 </script>

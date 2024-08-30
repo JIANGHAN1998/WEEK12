@@ -3,14 +3,29 @@
     <div class="content">
       <h1>Welcome to GOLD-YEARS-CONNECT</h1>
       <p>Focusing on your senior lifestyle and health</p>
-      
+      <div class="sitemap-navigation">
+        <div class="sitemap-item" @click="goTo('health-management')">
+          <h2>Health Management</h2>
+        </div>
+        <div class="sitemap-item" @click="goTo('community-activities')">
+          <h2>Community Activities</h2>
+        </div>
+        <div class="sitemap-item" @click="goTo('financial-assistance')">
+          <h2>Financial Assistance</h2>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'HeroSection',
+  name: 'HomeView',
+  methods: {
+    goTo(route) {
+      this.$router.push({ name: route });
+    }
+  }
 };
 </script>
 
@@ -19,13 +34,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   background-color: #e0e0e0;
   text-align: center;
 }
 
 .content {
-  max-width: 600px;
+  max-width: 800px;
 }
 
 h1 {
@@ -35,15 +51,33 @@ h1 {
 
 p {
   font-size: 18px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
-.explore-button {
-  background-color: #00aaff;
+.sitemap-navigation {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.sitemap-item {
+  background-color: #007bff;
   color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
   cursor: pointer;
+  flex: 1;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.sitemap-item:hover {
+  background-color: #0056b3;
+}
+
+h2 {
+  margin: 0;
+  font-size: 20px;
 }
 </style>

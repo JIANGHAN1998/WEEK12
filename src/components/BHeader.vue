@@ -8,19 +8,34 @@
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/feedback" class="nav-link" active-class="active">Feedback</router-link>
+        </li>
       </ul>
-      <button v-if="$route.name !== 'Login'" @click="goToLogin" class="logout-button">Login</button>
+      <div class="contact-info">
+        <span>Contact Us +61 0000000000</span>
+      </div>
+      <button v-if="isAuthenticated" @click="logout" class="logout-button">Logout</button>
+      <button v-else @click="goToLogin" class="login-button">Login</button>
     </header>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
 const router = useRouter()
 
 const goToLogin = () => {
-  router.push('/login')  // 这里的 '/login' 会导航到 `LoginView.vue`，如上配置
+  router.push('/login')
+}
+
+const logout = () => {
+  localStorage.setItem('isAuthenticated', 'false')
+  isAuthenticated.value = false
+  router.push('/login')
 }
 </script>
 
@@ -30,6 +45,7 @@ const goToLogin = () => {
   color: white;
 }
 
+.login-button,
 .logout-button {
   padding: 5px 10px;
   background-color: #007bff;
@@ -37,10 +53,18 @@ const goToLogin = () => {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: auto;
+  margin-left: 10px; 
 }
 
-.logout-button:hover {
+.logout-button:hover,
+.login-button:hover {
   background-color: #0056b3;
+}
+
+.contact-info {
+  margin-right: 10px; 
+  font-weight: bold;
+  font-size: 1rem;
+  align-self: center; 
 }
 </style>

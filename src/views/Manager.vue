@@ -1,22 +1,27 @@
 <template>
-  <div>
-    <h1>Administrator's Operating Catalogue</h1>
-    <p>Welcome back, honourable administrator.</p>
+  <div class="container">
+    <header class="d-flex justify-content-between py-3">
+      <ul class="nav nav-pills">
+      </ul>
+    </header>
+    <div>
+      <h1>Administrator's Operating Catalogue</h1>
+      <p>Welcome back, honourable administrator.</p>
+    </div>
   </div>
 </template>
 
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+</script>
+
 <style scoped>
-h1 {
-  font-size: 36px;
-  color: #333;
-  margin-bottom: 20px;
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
 }
 
-p {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #666;
-}
 </style>
-
-  

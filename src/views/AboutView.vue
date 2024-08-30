@@ -1,7 +1,9 @@
 <template>
     <div>
-      <h1>About Our Library</h1>
-      <p>Welcome to our digital library! We're dedicated to providing a vast collection of books and resources to our community.</p>
+      <h1>Welcome to Gold-Years-connect!</h1>
+      <p>We are committed to providing you with a warm, friendly environment. Whether you are looking for community activities, health coaching, or wish to make new friends, we are here for you. Here you'll find the latest weekly event listings, government news, professional medical guidance and financial help for your senior years.
+
+</p>
     </div>
   </template>
   
