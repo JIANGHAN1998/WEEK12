@@ -94,7 +94,7 @@ const validateConfirmPassword = (blur) => {
 
 const validatePhoneNumber = (blur) => {
   const phoneNumber = formData.value.phoneNumber
-  const phonePattern = /^[0-9]{10,15}$/  // 假设手机号长度为10到15位数字
+  const phonePattern = /^[0-9]{10,15}$/  
   if (!phonePattern.test(phoneNumber)) {
     if (blur) errors.value.phoneNumber = 'Invalid phone number.'
   } else {
@@ -104,7 +104,6 @@ const validatePhoneNumber = (blur) => {
 </script>
 
 <template>
-  <!-- 🗄️ W3. Library Registration Form -->
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
@@ -222,17 +221,14 @@ const validatePhoneNumber = (blur) => {
   max-width: 80vw;
   margin: 0 auto;
   padding: 20px;
-  /* background-color: #e0bfbf; */
   border-radius: 10px;
 }
 
-/* Class selectors */
 .form {
   text-align: center;
   margin-top: 50px;
 }
 
-/* ID selectors */
 #username:focus,
 #password:focus,
 #confirmPassword:focus,

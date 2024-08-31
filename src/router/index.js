@@ -6,7 +6,7 @@ import AccessDeniedView from '../views/AccessDeniedView.vue'
 import RegistrationPage from '../views/RegistrationPage.vue' 
 import AdminView from '../views/AdminView.vue' 
 import ManagerView from '../views/Manager.vue'
-import FeedbackView from '../views/Feedback.vue'  // 导入Feedback视图
+import FeedbackView from '../views/Feedback.vue' 
 
 const routes = [
   {
@@ -51,7 +51,7 @@ const routes = [
     path: '/feedback',
     name: 'Feedback',
     component: FeedbackView,
-    meta: { requiresAuth: true } // 需要登录的页面
+    meta: { requiresAuth: true } 
   }
 ]
 
@@ -60,13 +60,12 @@ const router = createRouter({
   routes
 })
 
-// 导航守卫：检查用户是否已登录
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'
   if (to.meta.requiresAuth && !isAuthenticated) {
     next({ name: 'AccessDenied' })
   } else if (to.name === 'Login' && isAuthenticated) {
-    next({ name: 'Home' })  // 如果已经登录，直接跳转到主页
+    next({ name: 'Home' })  
   } else {
     next()
   }

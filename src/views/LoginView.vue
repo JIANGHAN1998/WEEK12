@@ -50,8 +50,7 @@ const usernameError = ref(null)
 const passwordError = ref(null)
 const confirmPasswordError = ref(null)
 const router = useRouter()
-
-// 防止XSS的转义函数
+//XSS
 const escapeHtml = (unsafe) => {
   return unsafe
     .replace(/&/g, "&amp;")

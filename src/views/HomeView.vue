@@ -3,17 +3,6 @@
     <div class="content">
       <h1>Welcome to GOLD-YEARS-CONNECT</h1>
       <p>Focusing on your senior lifestyle and health</p>
-      <div class="sitemap-navigation">
-        <div class="sitemap-item" @click="goTo('health-management')">
-          <h2>Health Management</h2>
-        </div>
-        <div class="sitemap-item" @click="goTo('community-activities')">
-          <h2>Community Activities</h2>
-        </div>
-        <div class="sitemap-item" @click="goTo('financial-assistance')">
-          <h2>Financial Assistance</h2>
-        </div>
-      </div>
     </div>
   </section>
 </template>
