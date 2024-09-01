@@ -65,7 +65,6 @@ const validateFields = () => {
   passwordError.value = null
   confirmPasswordError.value = null
 
-  // 使用防止XSS攻击的转义函数来处理用户输入
   const sanitizedUsername = escapeHtml(formData.value.username);
   const sanitizedPassword = escapeHtml(formData.value.password);
 

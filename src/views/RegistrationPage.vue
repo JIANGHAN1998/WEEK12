@@ -94,7 +94,7 @@ const validateConfirmPassword = (blur) => {
 
 const validatePhoneNumber = (blur) => {
   const phoneNumber = formData.value.phoneNumber
-  const phonePattern = /^[0-9]{10,15}$/  // 假设手机号长度为10到15位数字
+  const phonePattern = /^[0-9]{10,15}$/  
   if (!phonePattern.test(phoneNumber)) {
     if (blur) errors.value.phoneNumber = 'Invalid phone number.'
   } else {
