@@ -11,6 +11,24 @@
         <li class="nav-item">
           <router-link to="/feedback" class="nav-link" active-class="active">Feedback</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/firebase-register" class="nav-link" active-class="active">Register</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/GetBookCount" class="nav-link" active-class="active">Get Book Count</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/WeatherCheck" class="nav-link" active-class="active">Get Weather</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/GetAllBookAPI" class="nav-link" active-class="active">Get All Book API</router-link> <!-- 新增 Get All Book API 链接 -->
+        </li>
       </ul>
       <div class="contact-info">
         <span>Contact Us +61 0000000000</span>
@@ -24,18 +42,32 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { getAuth, signOut } from 'firebase/auth'
 
-const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
+const auth = getAuth()
+const isAuthenticated = ref(false)
+
 const router = useRouter()
 
+auth.onAuthStateChanged(user => {
+  isAuthenticated.value = !!user
+})
+
 const goToLogin = () => {
-  router.push('/login')
+  router.push('/FireLogin')
 }
 
 const logout = () => {
-  localStorage.setItem('isAuthenticated', 'false')
-  isAuthenticated.value = false
-  router.push('/login')
+  signOut(auth)
+    .then(() => {
+      isAuthenticated.value = false
+      router.push('/home')
+      alert('Logout successful')
+      console.log('Firebase logout successful!')
+    })
+    .catch((error) => {
+      console.error('An error happened during logout:', error)
+    })
 }
 </script>
 
@@ -53,7 +85,7 @@ const logout = () => {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 10px; 
+  margin-left: 10px;
 }
 
 .logout-button:hover,

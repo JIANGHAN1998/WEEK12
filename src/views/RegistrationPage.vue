@@ -108,20 +108,20 @@ const validatePhoneNumber = (blur) => {
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <h1 class="text-center">GOLD-YEARS-YEARS-MEMBERSHIP</h1>
-        <form @submit.prevent="submitForm">
+      <form @submit.prevent="submitForm">
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6">
               <label for="username" class="form-label">Username</label>
               <input
                 type="text"
                 class="form-control"
-                id="username"
-                @blur="() => validateName(true)"
-                @input="() => validateName(false)"
+            id="username"
+            @blur="() => validateName(true)"
+            @input="() => validateName(false)"
                 v-model="formData.username"
-              />
+          />
               <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
-            </div>
+        </div>
 
             <div class="col-md-6 col-sm-6">
               <label for="gender" class="form-label">Gender</label>
@@ -131,7 +131,7 @@ const validatePhoneNumber = (blur) => {
                 <option value="other">Other</option>
               </select>
             </div>
-          </div>
+        </div>
 
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6">
@@ -139,60 +139,60 @@ const validatePhoneNumber = (blur) => {
               <input
                 type="password"
                 class="form-control"
-                id="password"
-                @blur="() => validatePassword(true)"
-                @input="() => validatePassword(false)"
+            id="password"
+            @blur="() => validatePassword(true)"
+            @input="() => validatePassword(false)"
                 v-model="formData.password"
-              />
+          />
               <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
-            </div>
+        </div>
 
             <div class="col-md-6 col-sm-6">
               <label for="confirmPassword" class="form-label">Confirm Password</label>
               <input
                 type="password"
                 class="form-control"
-                id="confirmPassword"
-                @blur="() => validateConfirmPassword(true)"
-                @input="() => validateConfirmPassword(false)"
+            id="confirmPassword"
+            @blur="() => validateConfirmPassword(true)"
+            @input="() => validateConfirmPassword(false)"
                 v-model="formData.confirmPassword"
-              />
+          />
               <div v-if="errors.confirmPassword" class="text-danger">{{ errors.confirmPassword }}</div>
             </div>
-          </div>
+        </div>
 
           <div class="mb-3">
             <label for="phoneNumber" class="form-label">Phone Number</label>
             <input
               type="tel"
               class="form-control"
-              id="phoneNumber"
-              @blur="() => validatePhoneNumber(true)"
-              @input="() => validatePhoneNumber(false)"
+            id="phoneNumber"
+            @blur="() => validatePhoneNumber(true)"
+            @input="() => validatePhoneNumber(false)"
               v-model="formData.phoneNumber"
               placeholder="Enter your phone number"
               required
-            />
+          />
             <div v-if="errors.phoneNumber" class="text-danger">{{ errors.phoneNumber }}</div>
-          </div>
+        </div>
 
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
             <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
-          </div>
-        </form>
+        </div>
+      </form>
       </div>
     </div>
-  </div>
+    </div>
 
   <div class="row mt-5">
     <h4>This is a Primevue Datatable.</h4>
-    <DataTable :value="submittedCards" tableStyle="min-width: 50rem">
-      <Column field="username" header="Username"></Column>
+      <DataTable :value="submittedCards" tableStyle="min-width: 50rem">
+        <Column field="username" header="Username"></Column>
       <Column field="password" header="Password"></Column>
-      <Column field="gender" header="Gender"></Column>
-      <Column field="phoneNumber" header="Phone Number"></Column>
-    </DataTable>
+        <Column field="gender" header="Gender"></Column>
+        <Column field="phoneNumber" header="Phone Number"></Column>
+      </DataTable>
   </div>
 
   <div class="row mt-5" v-if="submittedCards.length">
