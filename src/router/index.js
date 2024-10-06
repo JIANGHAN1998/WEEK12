@@ -9,11 +9,12 @@ import ManagerView from '../views/Manager.vue';
 import FeedbackView from '../views/Feedback.vue';
 import FirebaseSigninView from '../views/FirebaseSigninView.vue';
 import FirebaseRegisterView from '../views/FirebaseRegisterView.vue';
-import AddBookView from '../views/AddBookView.vue';
-import GetBookCountView from '../views/GetBookCountView.vue';
+import EventListings from '../views/EventListings.vue';
+import ContactFormView from '../views/ContactForm.vue';  // 使用 ContactForm 组件
 import WeatherView from '../views/WeatherView.vue';
-import CountBookAPI from '../views/CountBookAPI.vue';  
-import GetAllBookAPI from '../views/GetAllBookAPI.vue';  // 新增 GetAllBookAPI 导入
+import SendEmailView from '../views/send-email.vue';  // 正确引用 send-email.vue
+import GetAllBookAPI from '../views/GetAllBookAPI.vue';  // 导入 GetAllBookAPI 组件
+
 import { getAuth } from 'firebase/auth';
 
 const routes = [
@@ -74,13 +75,13 @@ const routes = [
   {
     path: '/addbook',
     name: 'AddBook',
-    component: AddBookView,
+    component: EventListings,
     meta: { requiresAuth: true }  // 需要身份验证
   },
   {
     path: '/GetBookCount',
     name: 'GetBookCount',
-    component: GetBookCountView,
+    component: ContactFormView,  // 替换 GetBookCountView
     meta: { requiresAuth: true }  // 需要身份验证
   },
   {
@@ -89,9 +90,9 @@ const routes = [
     component: WeatherView  // WeatherCheck 页面的路由
   },
   {
-    path: '/CountBookAPI',
-    name: 'CountBookAPI',
-    component: CountBookAPI  // CountBookAPI 页面的路由
+    path: '/send-email',  // 正确路径为 send-email
+    name: 'SendEmail',
+    component: SendEmailView  // send-email.vue 对应的路由
   },
   {
     path: '/GetAllBookAPI',  // 新增 GetAllBookAPI 路由
@@ -105,15 +106,15 @@ const router = createRouter({
   routes
 });
 
-// 路由守卫结合 Firebase 身份验证检查
+// 导航守卫结合 Firebase 身份验证检查
 router.beforeEach((to, from, next) => {
   const auth = getAuth();
-  const user = auth.currentUser;  // 使用 currentUser 同步获取当前用户
+  const user = auth.currentUser;
 
   if (to.meta.requiresAuth && !user) {
-    next({ name: 'AccessDenied' });  // 如果需要验证但用户未登录，重定向到拒绝访问页面
+    next({ name: 'AccessDenied' });  // 如果未认证，则重定向到 AccessDenied
   } else if (to.name === 'Login' && user) {
-    next({ name: 'Home' });  // 如果用户已登录，重定向到首页
+    next({ name: 'Home' });  // 已登录用户访问 Login 路由时重定向到 Home
   } else {
     next();  // 继续导航
   }

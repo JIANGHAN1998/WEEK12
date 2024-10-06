@@ -18,16 +18,16 @@
           <router-link to="/firebase-register" class="nav-link" active-class="active">Register</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
+          <router-link to="/addbook" class="nav-link" active-class="active">Event Listings</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/GetBookCount" class="nav-link" active-class="active">Get Book Count</router-link>
+          <router-link to="/GetBookCount" class="nav-link" active-class="active">Contact Us</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/WeatherCheck" class="nav-link" active-class="active">Get Weather</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/GetAllBookAPI" class="nav-link" active-class="active">Get All Book API</router-link> <!-- 新增 Get All Book API 链接 -->
+          <router-link to="/GetAllBookAPI" class="nav-link" active-class="active">Get All Book API</router-link> <!-- New Get All Book API link -->
         </li>
       </ul>
       <div class="contact-info">
