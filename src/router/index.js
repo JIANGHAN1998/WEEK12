@@ -10,10 +10,11 @@ import FeedbackView from '../views/Feedback.vue';
 import FirebaseSigninView from '../views/FirebaseSigninView.vue';
 import FirebaseRegisterView from '../views/FirebaseRegisterView.vue';
 import EventListings from '../views/EventListings.vue';
-import ContactFormView from '../views/ContactForm.vue';  // 使用 ContactForm 组件
+import ContactFormView from '../views/ContactForm.vue';
 import WeatherView from '../views/WeatherView.vue';
-import SendEmailView from '../views/send-email.vue';  // 正确引用 send-email.vue
-import GetAllBookAPI from '../views/GetAllBookAPI.vue';  // 导入 GetAllBookAPI 组件
+import SendEmailView from '../views/send-email.vue';
+import GetAllBookAPI from '../views/GetAllBookAPI.vue';
+import MapView from '../views/MapView.vue';  // 新增地图页面
 
 import { getAuth } from 'firebase/auth';
 
@@ -32,7 +33,7 @@ const routes = [
     path: '/about',
     name: 'About',
     component: AboutView,
-    meta: { requiresAuth: true }  // 需要身份验证
+    meta: { requiresAuth: true }
   },
   {
     path: '/access-denied',
@@ -53,19 +54,19 @@ const routes = [
     path: '/admin-login',
     name: 'AdminLogin',
     component: AdminView,
-    meta: { requiresAuth: true }  // 需要身份验证
+    meta: { requiresAuth: true }
   },
   {
     path: '/manager',
     name: 'Manager',
     component: ManagerView,
-    meta: { requiresAuth: true }  // 需要身份验证
+    meta: { requiresAuth: true }
   },
   {
     path: '/feedback',
     name: 'Feedback',
     component: FeedbackView,
-    meta: { requiresAuth: true }  // 需要身份验证
+    meta: { requiresAuth: true }
   },
   {
     path: '/FireLogin',
@@ -76,28 +77,33 @@ const routes = [
     path: '/addbook',
     name: 'AddBook',
     component: EventListings,
-    meta: { requiresAuth: true }  // 需要身份验证
+    meta: { requiresAuth: true }
   },
   {
     path: '/GetBookCount',
     name: 'GetBookCount',
-    component: ContactFormView,  // 替换 GetBookCountView
-    meta: { requiresAuth: true }  // 需要身份验证
+    component: ContactFormView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/WeatherCheck',
     name: 'WeatherCheck',
-    component: WeatherView  // WeatherCheck 页面的路由
+    component: WeatherView
   },
   {
-    path: '/send-email',  // 正确路径为 send-email
+    path: '/send-email',
     name: 'SendEmail',
-    component: SendEmailView  // send-email.vue 对应的路由
+    component: SendEmailView
   },
   {
-    path: '/GetAllBookAPI',  // 新增 GetAllBookAPI 路由
+    path: '/GetAllBookAPI',
     name: 'GetAllBookAPI',
-    component: GetAllBookAPI  // 对应 GetAllBookAPI.vue 组件
+    component: GetAllBookAPI
+  },
+  {
+    path: '/map',  // 新增的地图路由
+    name: 'Map',
+    component: MapView
   }
 ];
 
@@ -106,17 +112,16 @@ const router = createRouter({
   routes
 });
 
-// 导航守卫结合 Firebase 身份验证检查
 router.beforeEach((to, from, next) => {
   const auth = getAuth();
   const user = auth.currentUser;
 
   if (to.meta.requiresAuth && !user) {
-    next({ name: 'AccessDenied' });  // 如果未认证，则重定向到 AccessDenied
+    next({ name: 'AccessDenied' });
   } else if (to.name === 'Login' && user) {
-    next({ name: 'Home' });  // 已登录用户访问 Login 路由时重定向到 Home
+    next({ name: 'Home' });
   } else {
-    next();  // 继续导航
+    next();
   }
 });
 
