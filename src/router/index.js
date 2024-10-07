@@ -16,9 +16,14 @@ import SendEmailView from '../views/send-email.vue';
 import GetAllBookAPI from '../views/GetAllBookAPI.vue';
 import MapView from '../views/MapView.vue';  // 新增地图页面
 
+// Import the new admin pages
+import AdminAddEvent from '../views/AdminAddEvent.vue';
+import AdminEditEvent from '../views/AdminEditEvent.vue';
+
 import { getAuth } from 'firebase/auth';
 
 const routes = [
+  // Existing routes
   {
     path: '/login',
     name: 'Login',
@@ -101,9 +106,22 @@ const routes = [
     component: GetAllBookAPI
   },
   {
-    path: '/map',  // 新增的地图路由
+    path: '/map',
     name: 'Map',
     component: MapView
+  },
+  // New routes for admin pages
+  {
+    path: '/add-event',
+    name: 'AddEvent',
+    component: AdminAddEvent,
+    meta: { requiresAuth: true, requiresAdmin: true } // 需要管理员权限
+  },
+  {
+    path: '/edit-event',
+    name: 'EditEvent',
+    component: AdminEditEvent,
+    meta: { requiresAuth: true, requiresAdmin: true } // 需要管理员权限
   }
 ];
 
@@ -112,14 +130,21 @@ const router = createRouter({
   routes
 });
 
+// 导航守卫
 router.beforeEach((to, from, next) => {
   const auth = getAuth();
   const user = auth.currentUser;
 
+  // 检查用户是否已登录
   if (to.meta.requiresAuth && !user) {
     next({ name: 'AccessDenied' });
-  } else if (to.name === 'Login' && user) {
-    next({ name: 'Home' });
+  } else if (to.meta.requiresAdmin) {
+    // 检查是否为管理员
+    if (user && user.email === 'admin@163.com') {
+      next();
+    } else {
+      next({ name: 'AccessDenied' });
+    }
   } else {
     next();
   }

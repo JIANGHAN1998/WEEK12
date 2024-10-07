@@ -2,6 +2,7 @@
   <div class="container">
     <header class="d-flex justify-content-between py-3">
       <ul class="nav nav-pills">
+        <!-- Existing navigation items -->
         <li class="nav-item">
           <router-link to="/home" class="nav-link" active-class="active" aria-current="page">Home</router-link>
         </li>
@@ -14,7 +15,7 @@
         <li class="nav-item">
           <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!isAuthenticated">
           <router-link to="/firebase-register" class="nav-link" active-class="active">Register</router-link>
         </li>
         <li class="nav-item">
@@ -33,12 +34,21 @@
         <li class="nav-item">
           <router-link to="/map" class="nav-link" active-class="active">Map</router-link>
         </li>
+        <!-- New admin pages, only visible to authenticated users -->
+        <li class="nav-item" v-if="isAuthenticated">
+          <router-link to="/add-event" class="nav-link" active-class="active">Add Event</router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated">
+          <router-link to="/edit-event" class="nav-link" active-class="active">Edit Events</router-link>
+        </li>
       </ul>
       <div class="contact-info">
         <span>Contact Us +61 0000000000</span>
       </div>
       <button v-if="isAuthenticated" @click="logout" class="logout-button">Logout</button>
-      <button v-else @click="goToLogin" class="login-button">Login</button>
+      <button v-else>
+        <button @click="goToLogin" class="login-button">Login</button>
+      </button>
     </header>
   </div>
 </template>
@@ -46,14 +56,14 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { getAuth, signOut } from 'firebase/auth'
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'
 
 const auth = getAuth()
 const isAuthenticated = ref(false)
 
 const router = useRouter()
 
-auth.onAuthStateChanged(user => {
+onAuthStateChanged(auth, user => {
   isAuthenticated.value = !!user
 })
 
