@@ -16,11 +16,11 @@
       </div>
   
       <div v-else-if="error">
-        <p>{{ error }}</p> <!-- 显示错误信息 -->
+        <p>{{ error }}</p> 
       </div>
   
       <div v-else>
-        <p>Loading weather data...</p> <!-- 加载提示 -->
+        <p>Loading weather data...</p> 
       </div>
     </div>
   </template>
@@ -38,7 +38,6 @@
   
   const searchByCity = async () => {
     try {
-      // 先获取城市的经纬度
       const responseLocation = await axios.get(
         `http://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=1&appid=${apikey}`
       );
@@ -49,20 +48,17 @@
   
       const lat = responseLocation.data[0].lat;
       const lon = responseLocation.data[0].lon;
-  
-      // 使用获取到的经纬度查询天气
       const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
       const responseWeather = await axios.get(weatherUrl);
   
-      // 解析天气数据
       weatherData.value = responseWeather.data;
       iconUrl.value = `http://openweathermap.org/img/w/${responseWeather.data.weather[0].icon}.png`;
       temperature.value = responseWeather.data.main.temp;
-      error.value = null; // 清除错误
+      error.value = null; 
     } catch (err) {
       console.error('Error fetching weather data:', err);
       error.value = err.message || 'Failed to fetch weather data. Please try again later.';
-      weatherData.value = null; // 清除天气数据
+      weatherData.value = null; 
     }
   };
   </script>

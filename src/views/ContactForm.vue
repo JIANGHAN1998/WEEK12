@@ -38,7 +38,7 @@ export default {
         email: '',
         message: '',
       },
-      attachments: [], // To store uploaded files
+      attachments: [], 
       emailSent: false,
       emailError: false,
     };
@@ -53,7 +53,6 @@ export default {
       formData.append('email', this.formData.email);
       formData.append('message', this.formData.message);
 
-      // Append attachments to formData
       for (let i = 0; i < this.attachments.length; i++) {
         formData.append('attachments', this.attachments[i]);
       }

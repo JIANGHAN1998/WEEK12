@@ -43,7 +43,6 @@
   
       alert('Event added successfully!');
   
-      // 重置表单
       name.value = '';
       date.value = '';
       location.value = '';

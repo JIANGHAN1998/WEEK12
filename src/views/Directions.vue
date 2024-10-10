@@ -1,14 +1,14 @@
 <template>
     <div class="directions">
-      <h3>导航</h3>
-      <p>起点：{{ originName }}</p>
-      <p>终点：{{ destinationName }}</p>
+      <h3>navigator</h3>
+      <p>Starting point:{{ originName }}</p>
+      <p>The End:{{ destinationName }}</p>
       <ul>
         <li v-for="(step, index) in steps" :key="index">
           {{ step.maneuver.instruction }}
         </li>
       </ul>
-      <button @click="closeDirections">关闭导航</button>
+      <button @click="closeDirections">Turn off navigation</button>
     </div>
   </template>
   

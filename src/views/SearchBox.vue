@@ -1,6 +1,5 @@
 <template>
     <div class="search-box">
-      <!-- 起点输入框 -->
       <input
         type="text"
         v-model="originQuery"
@@ -13,7 +12,6 @@
         </li>
       </ul>
   
-      <!-- 终点输入框 -->
       <input
         type="text"
         v-model="destinationQuery"
@@ -76,12 +74,12 @@
         }
       },
       selectOrigin(place) {
-        this.$emit('origin-selected', place.center); // 返回起点坐标
+        this.$emit('origin-selected', place.center);
         this.originResults = [];
         this.originQuery = place.place_name;
       },
       selectDestination(place) {
-        this.$emit('destination-selected', place.center); // 返回终点坐标
+        this.$emit('destination-selected', place.center); 
         this.destinationResults = [];
         this.destinationQuery = place.place_name;
       },

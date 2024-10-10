@@ -2,7 +2,6 @@
   <div class="login-container">
     <h1>User Login</h1>
 
-    <!-- Email Input -->
     <div class="input-group">
       <label for="email">Email:</label>
       <input
@@ -14,7 +13,6 @@
       />
     </div>
 
-    <!-- Password Input -->
     <div class="input-group">
       <label for="password">Password:</label>
       <input
@@ -26,13 +24,11 @@
       />
     </div>
 
-    <!-- User Login and Admin Login Buttons -->
     <div class="button-group">
       <button @click="loginUser" class="user-button">User Login</button>
       <button @click="loginAdmin" class="admin-button">Admin Login</button>
     </div>
 
-    <!-- Error Message -->
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
@@ -42,44 +38,34 @@ import { ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 
-// User input
 const email = ref("")
 const password = ref("")
-
-// Error message
 const errorMessage = ref("")
-
 const router = useRouter()
 const auth = getAuth()
-
-// User login function
 const loginUser = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then(() => {
       console.log("User logged in successfully!")
-      router.push("/userDashboard") // Redirect to user dashboard
+      router.push("/userDashboard") 
     })
     .catch((error) => {
       console.error("Login failed:", error.message)
       errorMessage.value = `Login failed: ${error.message}`
     })
 }
-
-// Admin login function
 const loginAdmin = () => {
-  // Check if the email and password match the admin credentials
   if (email.value === "admin@163.com" && password.value === "123456") {
     signInWithEmailAndPassword(auth, email.value, password.value)
       .then(() => {
         console.log("Admin logged in successfully!")
-        router.push("/adminDashboard") // Redirect to admin dashboard
+        router.push("/adminDashboard") 
       })
       .catch((error) => {
         console.error("Admin login failed:", error.message)
         errorMessage.value = `Admin login failed: ${error.message}`
       })
   } else {
-    // If credentials are incorrect, show an error message
     errorMessage.value = "Admin login failed: Invalid credentials"
   }
 }

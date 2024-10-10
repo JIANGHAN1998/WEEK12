@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2>Senior Community Events in Melbourne</h2>
+    <h2 id="senior-community-events">Senior Community Events in Melbourne</h2>
 
     <div class="export-buttons">
-      <button @click="exportToPDF">Export to PDF</button>
-      <button @click="exportToCSV">Export to CSV</button>
+      <button @click="exportToPDF" aria-label="Export events to PDF">Export to PDF</button>
+      <button @click="exportToCSV" aria-label="Export events to CSV">Export to CSV</button>
     </div>
 
     <div id="export-content">
@@ -32,13 +32,8 @@
         :globalFilterFields="['name', 'date', 'location']"
         :loading="loading"
         responsiveLayout="scroll"
+        aria-live="polite"
       >
-        <template #header>
-          <div class="table-header">
-            <h3 class="m-0">Upcoming Events</h3>
-          </div>
-        </template>
-
         <Column field="name" header="Event Name" sortable></Column>
         <Column field="date" header="Date" sortable>
           <template #body="slotProps">
@@ -57,13 +52,8 @@
         :globalFilterFields="['name', 'date', 'location']"
         :loading="loading"
         responsiveLayout="scroll"
+        aria-live="polite"
       >
-        <template #header>
-          <div class="table-header">
-            <h3 class="m-0">Past Events</h3>
-          </div>
-        </template>
-
         <Column field="name" header="Event Name" sortable></Column>
         <Column field="date" header="Date" sortable>
           <template #body="slotProps">
@@ -134,7 +124,7 @@ export default {
           }
         });
 
-        upcomingEvents.value = upcoming.reverse(); // 显示最近的活动
+        upcomingEvents.value = upcoming.reverse(); 
         pastEvents.value = past;
         loading.value = false;
       });
@@ -200,5 +190,11 @@ export default {
 </script>
 
 <style scoped>
-/* 原有样式保持不变 */
+button:focus, 
+input:focus, 
+textarea:focus, 
+a:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
 </style>

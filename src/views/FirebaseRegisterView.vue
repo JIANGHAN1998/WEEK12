@@ -2,7 +2,6 @@
     <div class="register-container">
       <h1>Create an Account</h1>
       
-      <!-- Email Input -->
       <div class="input-group">
         <label for="email">Email:</label>
         <input
@@ -14,7 +13,6 @@
         />
       </div>
       
-      <!-- Password Input -->
       <div class="input-group">
         <label for="password">Password:</label>
         <input
@@ -26,7 +24,6 @@
         />
       </div>
   
-      <!-- Confirm Password Input -->
       <div class="input-group">
         <label for="confirmPassword">Confirm Password:</label>
         <input
@@ -39,7 +36,6 @@
         <p v-if="passwordError" class="error-message">Passwords do not match!</p>
       </div>
   
-      <!-- Save Button -->
       <div class="button-group">
         <button @click="register" class="submit-button">Save to Firebase</button>
       </div>
@@ -59,16 +55,13 @@
   const auth = getAuth()
   
   const register = () => {
-    // Check if passwords match
     if (password.value !== confirmPassword.value) {
       passwordError.value = true
       return
     }
     
-    // Clear the error if passwords match
     passwordError.value = false
   
-    // Proceed with Firebase registration
     createUserWithEmailAndPassword(auth, email.value, password.value)
       .then((userCredential) => {
         console.log("Firebase Register Successful!", userCredential)
