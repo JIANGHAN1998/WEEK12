@@ -38,7 +38,7 @@ export default {
         email: '',
         message: '',
       },
-      attachments: [], 
+      attachments: [],
       emailSent: false,
       emailError: false,
     };

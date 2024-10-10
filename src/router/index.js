@@ -9,7 +9,6 @@ import FirebaseRegisterView from '../views/FirebaseRegisterView.vue';
 import EventListings from '../views/EventListings.vue';
 import ContactFormView from '../views/ContactForm.vue';
 import WeatherView from '../views/WeatherView.vue';
-import SendEmailView from '../views/send-email.vue';
 import MapView from '../views/MapView.vue';  
 import AdminAddEvent from '../views/AdminAddEvent.vue';
 import AdminEditEvent from '../views/AdminEditEvent.vue';
@@ -71,11 +70,7 @@ const routes = [
     name: 'WeatherCheck',
     component: WeatherView
   },
-  {
-    path: '/send-email',
-    name: 'SendEmail',
-    component: SendEmailView
-  },
+ 
   {
     path: '/map',
     name: 'Map',
