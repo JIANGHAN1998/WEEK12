@@ -1,28 +1,25 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import BHeader from './components/BHeader.vue'; // 引入 BHeader 组件
+import BHeader from './components/BHeader.vue'; 
 
 const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true');
 const router = useRouter();
 const route = useRoute();
 
-// 用于处理退出登录
 const logout = () => {
   localStorage.removeItem('isAuthenticated');
   isAuthenticated.value = false;
   router.push({ name: 'Login' });
 };
 
-// 根据路由名称判断是否显示头部
 const showHeader = computed(() => {
-  return route.name !== 'CountBookAPI'; // 当路由名称不是 CountBookAPI 时，显示头部
+  return route.name !== 'CountBookAPI'; 
 });
 </script>
 
 <template>
   <div>
-    <!-- 使用 v-if 动态显示头部 -->
     <BHeader v-if="showHeader" />
 
     <main>
