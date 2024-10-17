@@ -14,6 +14,7 @@ import AdminAddEvent from '../views/AdminAddEvent.vue';
 import AdminEditEvent from '../views/AdminEditEvent.vue';
 import { getAuth } from 'firebase/auth';
 
+// 现有的路由配置
 const routes = [
   {
     path: '/home',
@@ -70,7 +71,6 @@ const routes = [
     name: 'WeatherCheck',
     component: WeatherView
   },
- 
   {
     path: '/map',
     name: 'Map',
@@ -90,19 +90,23 @@ const routes = [
   }
 ];
 
+// 不再合并新功能路由，保留现有路由
 const router = createRouter({
   history: createWebHistory(),
   routes
 });
 
-
+// 导航守卫，保持原有逻辑
 router.beforeEach((to, from, next) => {
   const auth = getAuth();
   const user = auth.currentUser;
 
+  // 验证用户是否需要登录
   if (to.meta.requiresAuth && !user) {
     next({ name: 'AccessDenied' });
-  } else if (to.meta.requiresAdmin) {
+  } 
+  // 验证是否需要管理员权限
+  else if (to.meta.requiresAdmin) {
     if (user && user.email === 'admin@163.com') {
       next();
     } else {
