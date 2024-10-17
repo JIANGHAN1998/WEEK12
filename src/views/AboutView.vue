@@ -11,7 +11,7 @@
   h1 {
     font-size: 36px;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 19px;
   }
   
   p {
