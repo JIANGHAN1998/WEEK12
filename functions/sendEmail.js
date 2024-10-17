@@ -5,7 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const fs = require('fs');
 
-sgMail.setApiKey('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');
+sgMail.setApiKey('');
 
 const app = express();
 app.use(cors());
